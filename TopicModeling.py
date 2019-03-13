@@ -34,7 +34,7 @@ path = os.path.join(dir_path, 'data\\Training_2.csv')
 s1 = pd.read_csv(path, header=0, index_col=0)
 print("Dataset has {} rows, {} columns.".format(*s1.shape))
 
-corpus = vca_s1["text"]
+corpus = s1["text"]
 
 def preprocess_text(corpus):
     """Takes a corpus in list format and applies basic preprocessing steps of word tokenization,
