@@ -53,7 +53,7 @@ print(accuracy * 100)
 #an example
 review_test = '''You are Awesome!!   Keep Smiling & have an amazing holiday season <ed><U+00A0><U+00BD><ed><U+00B8><U+008A>'''
 
-review_test = '''On my third hybrid 2017 Honda Accord....awesome car...exciting to drive...fast, peppy, and getting 47 MPG average.'''
+review_test = '''On my third ...awesome car...exciting to drive...fast, peppy, and getting 47 MPG average.'''
 
 words = word_tokenize(review_test)
 words = create_word_features(words)
@@ -72,62 +72,10 @@ print(accuracy * 100)
 #an example
 review_test = '''You are Awesome!!   Keep Smiling & have an amazing holiday season <ed><U+00A0><U+00BD><ed><U+00B8><U+008A>'''
 
-review_test = '''On my third hybrid 2017 Honda Accord....awesome car...exciting to drive...fast, peppy, and getting 47 MPG average.'''
+review_test = '''On my third ....awesome car...exciting to drive...fast, peppy, and getting 47 MPG average.'''
 
 words = word_tokenize(review_test)
 words = create_word_features(words)
 classifier.classify(words)
 
 
-###############################
-# read honda review data 
-import csv
-import pandas as pd
-   
-with open("post_comments.csv", "rb") as f:
-    reader = csv.reader(f)
-    i = reader.next()
-    comments = [row for row in reader]
-        
-honda_comments = [comments[i][2] for i in range(shape(comments)[0])]
-pred_atti = []
-for i in range(len(honda_comments)):
-    review_test = honda_comments[i]
-    words = word_tokenize(review_test.decode('latin-1'))
-    words = create_word_features(words)
-    pred_atti.append( classifier.classify(words))
-
-
-NB_pred = 'NB_pred.csv'
-with open(NB_pred, "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    for val in pred_atti:
-        writer.writerow([val])    
-
-
-Tree_pred = 'Tree_pred.csv'
-with open(Tree_pred, "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    for val in pred_atti:
-        writer.writerow([val])    
-    
-
-##############################################################
-# save and load file    
-import pickle
-f = open('tree_classifier.pickle', 'wb')
-pickle.dump(classifier, f)
-f.close()
-
-f = open('tree_classifier.pickle', 'rb')
-tree_classifier = pickle.load(f)
-f.close()
-
-
-f = open('NB_classifier.pickle', 'wb')
-pickle.dump(NB_classifier, f)
-f.close()
-
-f = open('NB_classifier.pickle', 'rb')
-Nb = pickle.load(f)
-f.close()
