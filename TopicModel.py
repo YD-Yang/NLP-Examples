@@ -30,9 +30,9 @@ np.random.seed(seed)
 pd.options.display.max_columns = 20
 
 dir_path = os.path.realpath('')
-path = os.path.join(dir_path, 'data\\VCA_Training_2.csv')
-vca_s1 = pd.read_csv(path, header=0, index_col=0)
-print("Dataset has {} rows, {} columns.".format(*vca_s1.shape))
+path = os.path.join(dir_path, 'data\\Training_2.csv')
+s1 = pd.read_csv(path, header=0, index_col=0)
+print("Dataset has {} rows, {} columns.".format(*s1.shape))
 
 corpus = vca_s1["text"]
 
@@ -92,22 +92,6 @@ dictionary_description, doc_term_matrix_description = nlp_model_pipeline(process
 ldamodel_description = LDA_topic_modelling(doc_term_matrix_description, dictionary_description, num_topics=2, passes=1)
 p = pyLDAvis.gensim.prepare(ldamodel_description, doc_term_matrix_description, dictionary_description)
 pyLDAvis.save_html(p, 'lda_2t.html')
-
-ldamodel_description = LDA_topic_modelling(doc_term_matrix_description, dictionary_description, num_topics=3, passes=1)
-p = pyLDAvis.gensim.prepare(ldamodel_description, doc_term_matrix_description, dictionary_description)
-pyLDAvis.save_html(p, 'lda_3t.html')
-
-ldamodel_description = LDA_topic_modelling(doc_term_matrix_description, dictionary_description, num_topics=4, passes=1)
-p = pyLDAvis.gensim.prepare(ldamodel_description, doc_term_matrix_description, dictionary_description)
-pyLDAvis.save_html(p, 'lda_4t.html')
-
-ldamodel_description = LDA_topic_modelling(doc_term_matrix_description, dictionary_description, num_topics=5, passes=1)
-p = pyLDAvis.gensim.prepare(ldamodel_description, doc_term_matrix_description, dictionary_description)
-pyLDAvis.save_html(p, 'lda_5t.html')
-
-ldamodel_description = LDA_topic_modelling(doc_term_matrix_description, dictionary_description, num_topics=6, passes=1)
-p = pyLDAvis.gensim.prepare(ldamodel_description, doc_term_matrix_description, dictionary_description)
-pyLDAvis.save_html(p, 'lda_6t.html')
 
 
 
